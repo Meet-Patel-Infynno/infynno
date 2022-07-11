@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import FooterCom from './components/layout/FooterCom';
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
+import Home from './components/Pages/Home';
+import MustWatch from './components/Pages/MustWatch';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar></Navbar>
+      <Sidebar></Sidebar>
+      <Home></Home>
+      <MustWatch type = {"popular"} title = {"MOVIES YOU MUST WATCH"}></MustWatch>
+      <MustWatch type = {"284052/similar"} title = {"RECOMMENDED MOVIES FOR YOU"}></MustWatch>
+      <MustWatch type = {"top_rated"} title = {"BOLLYWOOD CLASSICS"}></MustWatch>
+      <FooterCom></FooterCom>
     </div>
   );
 }
