@@ -6,19 +6,26 @@ import Home from './components/Pages/Home';
 import MustWatch from './components/Pages/MustWatch';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import MovieDetail from './components/Pages/MovieDetail';
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
       <Sidebar></Sidebar>
-      <Home></Home>
-      <MustWatch type = {"popular"} title = {"MOVIES YOU MUST WATCH"}></MustWatch>
-      <MustWatch type = {"284052/similar"} title = {"RECOMMENDED MOVIES FOR YOU"}></MustWatch>
-      <MustWatch type = {"top_rated"} title = {"BOLLYWOOD CLASSICS"}></MustWatch>
+      <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home></Home>} />
+      <Route path="/:id" element={<MovieDetail></MovieDetail>} />
+    </Routes>
+  </BrowserRouter>
       <FooterCom></FooterCom>
     </div>
-  );
+  )
 }
-
 export default App;

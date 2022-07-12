@@ -12,6 +12,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaImdb } from "react-icons/fa";
 import Sidebar from "../layout/Sidebar";
+import MustWatch from "./MustWatch";
 
 const Home = () => {
   const [apiData, setApiData] = useState([]);
@@ -90,6 +91,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <MustWatch type={"popular"} title={"MOVIES YOU MUST WATCH"}></MustWatch>
+      <MustWatch
+        type={"284052/similar"}
+        title={"RECOMMENDED MOVIES FOR YOU"}
+      ></MustWatch>
+      <MustWatch type={"top_rated"} title={"BOLLYWOOD CLASSICS"}></MustWatch>
     </>
   );
 };

@@ -6,6 +6,8 @@ import { api_base_url, api_key } from "../Config";
 import Card from "../layout/Card";
 import { BsChevronDown } from "react-icons/bs";
 import Slider from "react-slick";
+import MovieDetail from "./MovieDetail";
+import { Link } from "react-router-dom";
 
 const MustWatch = (props) => {
   const [apiData, setApiData] = useState([]);
@@ -29,10 +31,6 @@ const MustWatch = (props) => {
   useEffect(() => {
     load();
   }, []);
-
-  //   if (apiData.length === 0) {
-  //     return <p>jhgjhg</p>;
-  //   }
 
   return (
     <>
@@ -77,7 +75,9 @@ const MustWatch = (props) => {
                 apiData.results.map((Movies) => {
                   return (
                     <>
-                      <Card movie={Movies}></Card>
+                      <Link to={`/${Movies.id}`}>
+                        <Card movie={Movies}></Card>
+                      </Link>
                     </>
                   );
                 })}
