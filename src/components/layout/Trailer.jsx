@@ -7,9 +7,16 @@ const Trailer = (src) => {
 
   return (
     <>
-      <ReactPlayer controls width="307px" height="170px" url={url} />
+      <ReactPlayer
+        light
+        playing
+        config
+        controls
+        width="307px"
+        height="170px"
+        url={url}
+      />
     </>
   );
 };
-
 export default Trailer;

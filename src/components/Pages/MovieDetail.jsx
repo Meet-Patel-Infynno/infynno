@@ -73,7 +73,7 @@ const MovieDetail = () => {
   }
   useEffect(() => {
     load();
-  }, []);
+  }, [id]);
 
   if (apiData.length === 0 || apiImageData.length === 0) {
     return <p>Loading...</p>;
@@ -134,12 +134,14 @@ const MovieDetail = () => {
                 <div className="col-md-12 genres">
                   <span>AUDIO</span>
                   <p>
+                    English - Audio Description,English [Original]
                     {/* {apiData?.genres[0].name} , {apiData?.genres[1].name} */}
                   </p>
                 </div>
                 <div className="col-md-12 genres">
                   <span>SUBTITLES</span>
                   <p>
+                    English, Hindi
                     {/* {apiData?.genres[0].name} , {apiData?.genres[1].name} */}
                   </p>
                 </div>

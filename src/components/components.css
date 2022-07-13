@@ -615,6 +615,52 @@ a{
     margin-top: 86px;
 }
 /* Media Player */
-.ytp-swatch-background-color {
-    background-color: #5436A9;
+.ytp-swatch-background-color{
+    background-color: #5436A9 !important;
+}
+
+.ytp-progress-linear-live-buffer {
+    background: #5436A9 !important;
+}
+.react-player__play-icon{
+    border-color: transparent transparent transparent #5436a9 !important;
+    border-width: 11px 0px 11px 19px !important;
+}
+.react-player__shadow{
+    background: white !important;
+    margin-left: 205px;
+    margin-top: 95px;
+    width: 45px !important;
+    height: 45px !important;
+}
+.react-player__preview{
+    filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36)) !important;
+    border-radius: 7px !important;
+}
+iframe{
+    filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36)) !important;
+    border-radius: 7px !important;
+}
+
+.card {
+    /* z-index: 2; */
+    position: relative;
+    overflow: hidden;
+    width: 289px;
+    
+}
+.hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    width: 289px;
+    height: 172px;
+    transition: all 0.5s;
+}
+.card:hover .hover{
+    top: 0;
+    transition: all 0.5s;
 }

@@ -13,6 +13,12 @@ const Similar = (movie) => {
               class="similar-img-top"
               alt="..."
             />
+            <div className="hover">
+              <div className="htitle">
+                <p style={{ color: "white" }}>{movie.movie.title}</p>
+                {/* <p style={{ color: "white" }}>{movie.movie.overview}</p> */}
+              </div>
+            </div>
             <div class="card-body"></div>
           </div>
         </div>
