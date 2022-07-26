@@ -6,6 +6,7 @@ import axios from "axios";
 import { api_base_url, api_include, api_key } from "../config";
 import { Link } from "react-router-dom";
 import Finished from "./Finished";
+import { Bars } from "react-loader-spinner";
 
 export function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -141,38 +142,53 @@ const Home = () => {
     setUpcoming(upc);
   }
   console.log(upcoming, "upcoming32434...");
+
   useEffect(() => {
     getFixture();
   }, []);
 
   return (
     <>
-      <section className="home flex flex-col items-center h-[300px] mt-[20px] justify-start ">
-        <div className="bg-nav-rgba w-full h-[168px] absolute left-0 top-[60px] z-0"></div>
-        <div className=" z-10 relative top-[60px]">
-          <div className="w-[1024px]">
-            <div className="title mb-3 flex justify-between items-center ">
-              <p className="text-white text-xl font-semibold z-10 leading-relaxed">
-                Featured Matches
-              </p>
-              <div className="dots"></div>
-            </div>
-            <div className="cricket-card">
-              <Slider {...settings}>
-                {console.log(fixtures, "stateeee")}
-                {fixtures.length !== 0 &&
-                  fixtures.map((data) => {
-                    return (
-                      <>
-                        <Card response={data}></Card>
-                      </>
-                    );
-                  })}
-              </Slider>
+      {fixtures.length === 0 ? (
+        <div className="flex justify-center items-center h-[300px] w-[100%] mt-[100px]">
+          <Bars
+            height="80"
+            width="80"
+            color="rgb(255, 80, 0)"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      ) : (
+        <section className="home flex flex-col items-center h-[300px] mt-[20px] justify-start ">
+          <div className="bg-nav-rgba w-full h-[168px] absolute left-0 top-[60px] z-0"></div>
+          <div className=" z-10 relative top-[60px]">
+            <div className="w-[1024px]">
+              <div className="title mb-3 flex justify-between items-center ">
+                <p className="text-white text-xl font-semibold z-10 leading-relaxed">
+                  Featured Matches
+                </p>
+                <div className="dots"></div>
+              </div>
+              <div className="cricket-card">
+                <Slider {...settings}>
+                  {console.log(fixtures, "stateeee")}
+                  {fixtures.length !== 0 &&
+                    fixtures.map((data) => {
+                      return (
+                        <>
+                          <Card response={data}></Card>
+                        </>
+                      );
+                    })}
+                </Slider>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       {finished1.length > 0 && (
         <>
           <Finished title="Finished Matches" data={finished1}></Finished>
