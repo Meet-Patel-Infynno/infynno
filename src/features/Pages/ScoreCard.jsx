@@ -119,7 +119,7 @@ const ScoreCard = (props) => {
                   Did Not Bat
                 </div>
               </div>
-              <div className="flex text-sm w-[375px]">
+              <div className="flex text-sm w-[355px]">
                 <div className="font-semibold text-xs text-[rgb(120,120,120)] leading-[1.33] min-w-[60px]">
                   {props.notbat &&
                     props.notbat
