@@ -32,13 +32,13 @@ const HomeSlice = createSlice({
             state.msg = "Pendingggg";
         })
         .addCase(fixture.fulfilled,(state , action)=>{
-            state.fixtures = action.payload.data.data.slice(2,12);
+            state.fixtures = action.payload.data.data.slice(12,22);
 
             state.finished = action.payload.data.data.filter((data)=>{
                 if(data.live === false){
                     return data;
                 }
-            })
+            }).slice(12,22)
             
             state.upcoming = action.payload.data.data.filter((data)=>{
                 if(data.status === "Aban."){

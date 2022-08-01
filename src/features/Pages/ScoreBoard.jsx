@@ -5,21 +5,12 @@ import { api_base_url, api_include, api_key } from "../../config";
 import ScoreCard from "./ScoreCard";
 import { Bars } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { scbFixture } from "./ScoreBoardSlice";
+import { cleanUp, scbFixture } from "./ScoreBoardSlice";
 
 const ScoreBoard = () => {
-  // const [apiData, setApiData] = useState([]);
-  // const [localScoreArr, setscoreArr] = useState([]);
-  // const [visitorScoreArr, setVisitorscoreArr] = useState([]);
-  // const [localBatting, setLocalBattng] = useState([]);
-  // const [visitorBatting, setvisitorBattng] = useState([]);
-  // const [localextras, setlocalextras] = useState([]);
-  // const [visitorextras, setvisitorextras] = useState([]);
-  // const [localbowling, setlocalbowling] = useState([]);
-  // const [visitorbowling, setvisitorbowling] = useState([]);
-  // const [localnotbat, setlocalnotbat] = useState([]);
-  // const [visitornotbat, setvisitornotbat] = useState([]);
   const dispatch = useDispatch();
+  const [active, setActive] = useState("ScoreBoard");
+
   const {
     apiData,
     localScoreArr,
@@ -39,105 +30,17 @@ const ScoreBoard = () => {
   console.log(localextras, "extrasss");
   console.log(localnotbat, "notbat");
 
-  // async function fetchData() {
-  //   const response = await axios.get(
-  //     api_base_url +
-  //       "fixtures/" +
-  //       id +
-  //       api_key +
-  //       api_include +
-  //       "localteam,scoreboards,visitorteam,bowling.team,batting.team,runs.team,bowling.bowler,batting.batsman,batting.catchstump,batting.bowler,lineup"
-  //   );
-  // console.log(response.data.data, "scoreboard");
-  // const res = response.data.data;
-  // setApiData(res);
-
-  //   const localscore = res.runs.filter((data) => {
-  //     if (data.team_id === res.localteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   // console.log(localscore[0], "asasasas");
-  //   setscoreArr(localscore[0]);
-
-  //   const visitorscore = res.runs.filter((data) => {
-  //     if (data.team_id === res.visitorteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   // console.log(visitorscore[0], "visitor");
-  //   setVisitorscoreArr(visitorscore[0]);
-
-  //   const locbat = res.batting.filter((data) => {
-  //     if (data.team_id === res.localteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   setLocalBattng(locbat);
-
-  //   const visbat = res.batting.filter((data) => {
-  //     if (data.team_id === res.visitorteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   setvisitorBattng(visbat);
-
-  //   const ext = res.scoreboards.filter((data) => {
-  //     if (data.team_id === res.localteam.id) {
-  //       if (data.type === "extra") {
-  //         return data;
-  //       }
-  //     }
-  //   });
-  //   setlocalextras(ext[0]);
-
-  //   const extv = res.scoreboards.filter((data) => {
-  //     if (data.team_id === res.visitorteam.id) {
-  //       if (data.type === "extra") {
-  //         return data;
-  //       }
-  //     }
-  //   });
-  //   setvisitorextras(extv[0]);
-
-  //   const localbolling = res.bowling.filter((data) => {
-  //     if (data.team_id === res.localteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   setlocalbowling(localbolling);
-
-  //   const visitorbolling = res.bowling.filter((data) => {
-  //     if (data.team_id === res.visitorteam.id) {
-  //       return data;
-  //     }
-  //   });
-  //   setvisitorbowling(visitorbolling);
-
-  //   const localnb = res.lineup.filter((data) => {
-  //     if (res.localteam.id === data.lineup.team_id)
-  //       return locbat.every((nb) => data.id !== nb.batsman.id);
-  //   });
-  //   setlocalnotbat(localnb);
-
-  //   const visitornb = res.lineup.filter((data) => {
-  //     if (res.visitorteam.id === data.lineup.team_id)
-  //       return visbat.every((nb) => data.id !== nb.batsman.id);
-  //   });
-  //   setvisitornotbat(visitornb);
-  // }
-  // console.log(localnotbat, "localnotbat");
-  // console.log(visitornotbat, "visitornotbat");
-  // console.log(apiData, "apidata");
-  // console.log(localBatting, "localbatting");
-
   useEffect(() => {
     dispatch(scbFixture(id));
-  }, []);
+    // console.log("activ", active);
+    return () => {
+      dispatch(cleanUp());
+    };
+  }, [active]);
 
   return (
     <>
-      {!apiData ? (
+      {apiData.length === 0 ? (
         <div className="flex justify-center items-center h-[300px] w-[100%] mt-[100px]">
           <Bars
             height="80"
@@ -207,51 +110,124 @@ const ScoreBoard = () => {
             </div>
             <div className="stable">
               <div className="table-head z-0 bg-white h-12 relative flex items-center overflow-auto border-y-[1px] border-solid border-[#e6e7ec]">
-                <div className="flex items-center justify-center cursor-pointer px-5 w-full min-w-fit">
-                  <div className="pointer-events-none text-sm transition-all leading-[1.43] tracking-[0.56px] z-[2] text-[#66718c] font-normal">
+                <div
+                  className={`flex items-center justify-center cursor-pointer px-5 w-full min-w-fit`}
+                >
+                  <div
+                    onClick={() => {
+                      console.log("actice is working ");
+                      setActive("Fantasy");
+                    }}
+                    className={`w-auto text-sm leading-[1.43] tracking-[0.56px] ${
+                      active == "Fantasy"
+                        ? "text-black font-semibold"
+                        : "text-[#66718c] font-normal"
+                    }  `}
+                  >
                     Fantasy
                   </div>
+                  <div
+                    className={`${
+                      active == "Fantasy" ? "bg-[rgb(255,80,0)] rounded-md" : ""
+                    } w-[100px] h-[3px] overflow-hidden top-[41px] absolute`}
+                  ></div>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer px-5 w-full min-w-fit">
-                  <div className="pointer-events-none text-sm transition-all leading-[1.43] tracking-[0.56px] z-[2] text-[#66718c] font-normal">
+                  <div
+                    onClick={() => setActive("Info")}
+                    className={`w-auto text-sm leading-[1.43] tracking-[0.56px] ${
+                      active == "Info"
+                        ? "text-black font-semibold"
+                        : "text-[#66718c] font-normal"
+                    }  `}
+                  >
                     Info
                   </div>
+                  <div
+                    className={`${
+                      active == "Info" ? "bg-[rgb(255,80,0)] rounded-md" : ""
+                    } w-[100px] h-[3px] overflow-hidden top-[41px] absolute`}
+                  ></div>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer px-5 w-full min-w-fit">
-                  <div className="pointer-events-none text-sm transition-all leading-[1.43] tracking-[0.56px] z-[2] text-[#66718c] font-normal">
+                  <div
+                    onClick={() => setActive("Live")}
+                    className={`w-auto text-sm leading-[1.43] tracking-[0.56px] ${
+                      active == "Live"
+                        ? "text-black font-semibold"
+                        : "text-[#66718c] font-normal"
+                    }  `}
+                  >
                     Live
                   </div>
+                  <div
+                    className={`${
+                      active == "Live" ? "bg-[rgb(255,80,0)] rounded-md" : ""
+                    } w-[100px] h-[3px] overflow-hidden top-[41px] absolute`}
+                  ></div>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer px-5 w-full min-w-fit">
-                  <div className="pointer-events-none text-sm transition-all leading-[1.43] tracking-[0.56px] z-[2] text-[#66718c] font-normal">
+                  <div
+                    onClick={() => setActive("ScoreBoard")}
+                    className={`w-auto text-sm leading-[1.43] tracking-[0.56px] ${
+                      active == "ScoreBoard"
+                        ? "text-black font-semibold"
+                        : "text-[#66718c] font-normal"
+                    }  `}
+                  >
                     Scorecard
                   </div>
+                  <div
+                    className={`${
+                      active == "ScoreBoard"
+                        ? "bg-[rgb(255,80,0)] rounded-md"
+                        : ""
+                    } w-[100px] h-[3px] overflow-hidden top-[41px] absolute`}
+                  ></div>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer px-5 w-full min-w-fit">
-                  <div className="pointer-events-none text-sm transition-all leading-[1.43] tracking-[0.56px] z-[2] text-[#66718c] font-normal">
+                  <div
+                    onClick={() => setActive("Squad")}
+                    className={`w-auto text-sm leading-[1.43] tracking-[0.56px] ${
+                      active == "Squad"
+                        ? "text-black font-semibold"
+                        : "text-[#66718c] font-normal"
+                    }  `}
+                  >
                     Squad
                   </div>
+                  <div
+                    className={`${
+                      active == "Squad" ? "bg-[rgb(255,80,0)] rounded-md" : ""
+                    } w-[100px] h-[3px] overflow-hidden top-[41px] absolute`}
+                  ></div>
                 </div>
               </div>
               <div className="min-h-[500px]">
-                <ScoreCard
-                  team={localScoreArr}
-                  fixture={apiData}
-                  code={apiData?.localteam?.code}
-                  batting={localBatting}
-                  extras={localextras}
-                  bowling={visitorbowling}
-                  notbat={localnotbat}
-                ></ScoreCard>
-                <ScoreCard
-                  team={visitorScoreArr}
-                  fixture={apiData}
-                  code={apiData?.visitorteam?.code}
-                  batting={visitorBatting}
-                  extras={visitorextras}
-                  bowling={localbowling}
-                  notbat={visitornotbat}
-                ></ScoreCard>
+                {active === "ScoreBoard" ? (
+                  <>
+                    <ScoreCard
+                      team={localScoreArr}
+                      fixture={apiData}
+                      code={apiData?.localteam?.code}
+                      batting={localBatting}
+                      extras={localextras}
+                      bowling={visitorbowling}
+                      notbat={localnotbat}
+                    ></ScoreCard>
+                    <ScoreCard
+                      team={visitorScoreArr}
+                      fixture={apiData}
+                      code={apiData?.visitorteam?.code}
+                      batting={visitorBatting}
+                      extras={visitorextras}
+                      bowling={localbowling}
+                      notbat={visitornotbat}
+                    ></ScoreCard>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>

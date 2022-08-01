@@ -66,10 +66,10 @@ const Card = ({ response }) => {
                       <AiFillPlayCircle className="w-5 h-5"></AiFillPlayCircle>
                       <p>Watch Live</p>
                     </div>
-                  ) : response.status === "Aban." ? (
-                    "Upcoming"
-                  ) : (
+                  ) : response.status !== "Aban." && !response.live ? (
                     "Result"
+                  ) : (
+                    "Upcoming"
                   )}
                 </button>
               </Link>

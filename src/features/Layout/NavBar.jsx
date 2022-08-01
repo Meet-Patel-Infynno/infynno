@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -181,7 +181,7 @@ const NavBar = () => {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "text-rgba"
+                        ? "text-active-rgba"
                         : "text-white hover:bg-gray-700 hover:text-white",
                       "block px-3 py-2 rounded-md text-base font-medium"
                     )}

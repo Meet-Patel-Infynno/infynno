@@ -14,6 +14,8 @@ const initialState = {
     visitorbowling:[],
     localnotbat:[],
     visitornotbat:[],
+    localDropDown:false,
+    vsitorDropDown:false,
     msg:""
 }
 
@@ -34,7 +36,24 @@ export const scbFixture = createAsyncThunk(
 const ScoreBoardSlice = createSlice({
     name:"getFixtureWithId",
     initialState,
-    reducers:{},
+    reducers:{
+        cleanUp:(state)=>{
+            state.apiData=[];
+            state.localScoreArr=[];
+            state.visitorScoreArr=[];
+            state.localBatting=[];
+            state.visitorBatting=[];
+            state.localextras=[];
+            state.visitorextras=[];
+            state.localbowling=[];
+            state.visitorbowling=[];
+            state.localnotbat=[];
+            state.visitornotbat=[];
+            state.localDropDown=false;
+            state.vsitorDropDown=false;
+            state.msg="";
+        }
+    },
     extraReducers(builder){
         builder
         .addCase(scbFixture.pending,(state , action)=>{
@@ -106,12 +125,7 @@ const ScoreBoardSlice = createSlice({
                      return state.visitorBatting.every((nb) =>
                          data.id !== nb.player_id && data.lineup.team_id == action.payload.data.data.visitorteam.id 
                      )
-                }
-
-   
-
-
-            )
+            })      
         })
         .addCase(scbFixture.rejected,(state , action)=>{
             state.msg = "Rejectedddd";
@@ -120,4 +134,5 @@ const ScoreBoardSlice = createSlice({
 
 })
 
+export const {cleanUp} = ScoreBoardSlice.actions;
 export default ScoreBoardSlice.reducer;

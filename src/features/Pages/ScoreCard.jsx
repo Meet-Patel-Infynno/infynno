@@ -17,11 +17,11 @@ const ScoreCard = (props) => {
       <section className="scorecard bg-white w-full">
         <div className="sccontent flex items-center justify-between box-border border-b-[1px] border-solid border-[#e6e6e6] bg-[#fafafa] h-[50px] w-full px-[18px] py-[12px]">
           <div className="left text-[16px] leading-[1.25] tracking-[0.5px] font-semibold text-black">
-            {props.code}
+            {props?.code}
           </div>
           <div className="right flex items-center justify-center gap-[20px]">
             <div className="score text-sm tracking-[0.25px] font-semibold text-black m-w-[75px] mr-20px">
-              {props.team.score}/{props.team.wickets}
+              {props.team?.score}/{props.team?.wickets}
             </div>
             <div className="dropdown cursor-pointer" onClick={upDown}>
               <IoIosArrowDropdownCircle
@@ -61,7 +61,7 @@ const ScoreCard = (props) => {
                       <div className="pl-[7px] flex flex-col items-start justify-center">
                         <div className="text-sm cursor-pointer text-[rgb(0,129,255)]">
                           {data.batsman?.fullname}
-                          {data.batsman.position.name === "Wicketkeeper"
+                          {data.batsman?.position.name === "Wicketkeeper"
                             ? "(wk)"
                             : ""}
                         </div>
@@ -101,15 +101,15 @@ const ScoreCard = (props) => {
               <div className="flex text-sm pr-3">
                 <div className="font-semibold text-xs flex items-center text-[rgb(120,120,120)] leading-[1.33] min-w-[60px]">
                   <div className="text-black text-[14px] font-semibold">
-                    {props.extras.bye +
-                      props.extras.leg_bye +
-                      props.extras.noball_balls +
-                      props.extras.wide +
-                      props.extras.penalty}
+                    {props.extras?.bye +
+                      props.extras?.leg_bye +
+                      props.extras?.noball_balls +
+                      props.extras?.wide +
+                      props.extras?.penalty}
                   </div>{" "}
-                  (b {props.extras.bye}, lb {props.extras.leg_bye}, nb{" "}
-                  {props.extras.noball_balls}, w {props.extras.wide}, p{" "}
-                  {props.extras.penalty})
+                  (b {props.extras?.bye}, lb {props.extras?.leg_bye}, nb{" "}
+                  {props.extras?.noball_balls}, w {props.extras?.wide}, p{" "}
+                  {props.extras?.penalty})
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@ const ScoreCard = (props) => {
                   Did Not Bat
                 </div>
               </div>
-              <div className="flex text-sm pr-3">
+              <div className="flex text-sm w-[375px]">
                 <div className="font-semibold text-xs text-[rgb(120,120,120)] leading-[1.33] min-w-[60px]">
                   {props.notbat &&
                     props.notbat
@@ -139,10 +139,10 @@ const ScoreCard = (props) => {
               <div className="flex text-sm pr-3">
                 <div className="flex justify-center items-baseline gap-[5px] font-semibold text-xs text-[rgb(120,120,120)] leading-[1.33] min-w-[60px]">
                   <div className="text-black text-lg font-semibold leading-[1.25] tracking-[0.5px]">
-                    {props.team.score}/{props.team.wickets}
+                    {props.team?.score}/{props.team?.wickets}
                   </div>
                   <div className="text-[14px] tracking-[0.25px]">
-                    ({props.team.overs} Overs)
+                    ({props.team?.overs} Overs)
                   </div>
                 </div>
               </div>
