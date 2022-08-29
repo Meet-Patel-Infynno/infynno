@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import CardLoader from "./cardLoader";
 import MyModal from "./MyModal";
 
-const Card = (props) => {
+const Card = ({cars}) => {
   const router = useRouter();
   const {isLoading} = useSelector((state)=>state.homePageSlice)
 
@@ -14,14 +14,14 @@ const Card = (props) => {
       {isLoading?<CardLoader />:
    
       <section
-      onClick={() => router.push(`/${props.cars.vin}`)}
+      onClick={() => router.push(`/${cars.vin}`)}
         className="card w-[984px] h-[330px] bg-[#FFFFFF] rounded-[10px] shadow-card-shadow overflow-hidden"
       >
         <div className="cmain w-full">
           <div className="ctop flex gap-6">
             <div className="ctleft rounded-tl-[10px] w-[360px] h-[254px]">
               <Image
-                src={props.cars.photos?props.cars.photos[0]:"/defaultcar.png"}
+                src={cars.photos?cars.photos[0]:"/defaultcar.png"}
                 alt="logo"
                 width={360}
                 height={254}
@@ -30,14 +30,14 @@ const Card = (props) => {
             <div className="ctright pt-6 flex flex-col justify-between">
               <div className="ctrtop">
                 <div className="font-bold text-xl leading-8 text-[#28293D]">
-                  {props.cars.year} {props.cars.make} {props.cars.model}
+                  {cars.year} {cars.make} {cars.model}
                 </div>
                 <div className="font-normal text-xs leading-4 tracking-[0.2px] text-[#8F90A6]">
-                  {props.cars.dealership} • {props.cars.milage} •{" "}
-                  {props.cars.exterior_color}
+                  {cars.dealership} • {cars.milage} •{" "}
+                  {cars.exterior_color}
                 </div>
                 <div className="font-normal text-xs leading-4 tracking-[0.2px] text-[#8F90A6]">
-                  {props.cars.city}, {props.cars.state}
+                  {cars.city}, {cars.state}
                 </div>
               </div>
               <div className="ctrbottom flex gap-80 w-full">
@@ -47,7 +47,7 @@ const Card = (props) => {
                       style: "currency",
                       currency: "USD",
                       maximumSignificantDigits: 3,
-                    }).format(props.cars.price)}
+                    }).format(cars.price)}
                   </div>
                   <div className="rounded-full text-white italic text-xs bg-[#8F90A6] w-4 h-4 flex justify-center items-center">
                     i
@@ -76,11 +76,11 @@ const Card = (props) => {
             <div className="bbottom flex gap-4 font-normal text-sm leading-6 text-[#28293D]">
               <div className="bcontent1">
                 •{" "}
-                { props.cars.car_offers && props.cars.car_offers.split(",")[0].replace(/[\[\]'"]+/g, "")}
+                { cars.car_offers && cars.car_offers.split(",")[0].replace(/[\[\]'"]+/g, "")}
               </div>
               <div className="bcontent2">
                 •{" "}
-                { props.cars.car_offers && props.cars.car_offers.split(",")[1].replace(/[\[\]'"]+/g, "")}
+                { cars.car_offers && cars.car_offers.split(",")[1].replace(/[\[\]'"]+/g, "")}
               </div>
             </div>
           </div>

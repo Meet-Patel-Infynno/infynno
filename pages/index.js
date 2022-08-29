@@ -24,55 +24,32 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     const cars = `https://autodigg.com/ad-api/cars/list?usedCar=false&car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&newCar=false`;
 
-    // const allCars = await cars.data;
-
     const count =
       "https://autodigg.com/ad-api/cars/list?car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&year=2011,2021&return=count";
 
-    // const data = await res.data;
-
     const make = "https://autodigg.com/ad-api/cars/list?return=make";
-
-    // const makes = await make.data;
 
     const model = "https://autodigg.com/ad-api/cars/list?make=&return=model";
 
-    // const models = await model.data;
-
     const bodytype = "https://autodigg.com/ad-api/cars/list?return=body_type";
-
-    // const bodytypes = await bodytype.data;
 
     const excolor =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=exterior_color";
 
-    // const extcolors = await excolor.data;
-
     const intcolor =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=interior_color";
-
-    // const intcolors = await intcolor.data;
 
     const transmission =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=transmission";
 
-    // const transmissions = await transmission.data;
-
     const dtrain =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=drivetrain";
-
-    // const dtrains = await dtrain.data;
 
     const fuel =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=fuel_type";
 
-    // const fuelType = await fuel.data;
-
     const feature =
       "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=features";
-
-    // const features = await feature.data;
-
     const data = await axios.all([
       axios.get(cars),
       axios.get(count),
