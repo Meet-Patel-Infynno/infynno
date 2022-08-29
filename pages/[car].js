@@ -24,7 +24,6 @@ const Car = ({ carDetails }) => {
   const router = useRouter();
   const car = router.query.car;
   const cararr = carDetails.features1.split(",");
-  console.log(carDetails, "cardetailssss");
 
   return (
     <>

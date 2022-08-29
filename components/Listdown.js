@@ -15,6 +15,16 @@ const Listdown = ({
   smtData4,
   smt5,
   smtData5,
+  state1 ,
+  state2 ,
+  state3 ,
+  state4 ,
+  state5 ,
+  stateFunction1,
+  stateFunction2,
+  stateFunction3,
+  stateFunction4,
+  stateFunction5,
 }) => {
   return (
     <Disclosure>
@@ -35,15 +45,16 @@ const Listdown = ({
               </div>
               <div className="bscheckbox flex flex-col gap-3">
                 {smtData1 &&
-                  Object.entries(smtData1).map(([key, value]) => {
+                  Object.entries(smtData1)?.map(([key, value]) => {
                     return (
                       <>
-                        <CheckBox name={key}></CheckBox>
+                        <CheckBox name={key} state={state1} stateFunction={stateFunction1}></CheckBox>
                       </>
                     );
                   })}
               </div>
             </div>
+            {smtData2 &&
             <div className="bodystyle flex flex-col gap-[14px]">
               <div className="bstitle font-semibold text-xs leading-4 uppercase text-[#8F90A6]">
                 {smt2}
@@ -53,27 +64,31 @@ const Listdown = ({
                   Object.entries(smtData2).map(([key, value]) => {
                     return (
                       <>
-                        <CheckBox name={key}></CheckBox>
+                        <CheckBox name={key} state={state2} stateFunction={stateFunction2}></CheckBox>
                       </>
                     );
                   })}
               </div>
             </div>
+            }
+            {smtData3 &&
             <div className="bodystyle flex flex-col gap-[14px]">
               <div className="bstitle font-semibold text-xs leading-4 uppercase text-[#8F90A6]">
                 {smt3}
               </div>
               <div className="bscheckbox flex flex-col gap-3">
                 {smtData3 &&
-                  Object.entries(smtData2).map(([key, value]) => {
+                  Object.entries(smtData3).map(([key, value]) => {
                     return (
                       <>
-                        <CheckBox name={key}></CheckBox>
+                        <CheckBox name={key} state={state3} stateFunction={stateFunction3}></CheckBox>
                       </>
                     );
                   })}
               </div>
             </div>
+            }
+            {smtData4 &&
             <div className="bodystyle flex flex-col gap-[14px]">
               <div className="bstitle font-semibold text-xs leading-4 uppercase text-[#8F90A6]">
                 {smt4}
@@ -83,27 +98,30 @@ const Listdown = ({
                   Object.entries(smtData4).map(([key, value]) => {
                     return (
                       <>
-                        <CheckBox name={key}></CheckBox>
+                        <CheckBox name={key} state={state4} stateFunction={stateFunction4}></CheckBox>
                       </>
                     );
                   })}
               </div>
             </div>
+                }
+            {smtData5 &&
             <div className="bodystyle flex flex-col gap-[14px]">
               <div className="bstitle font-semibold text-xs leading-4 uppercase text-[#8F90A6]">
                 {smt5}
               </div>
               <div className="bscheckbox flex flex-col gap-3">
-                {smtData5 &&
+                {smtData5 && 
                   Object.entries(smtData5).map(([key, value]) => {
                     return (
                       <>
-                        <CheckBox name={key}></CheckBox>
+                        <CheckBox name={key} state={state5} stateFunction={stateFunction5}></CheckBox>
                       </>
                     );
                   })}
               </div>
             </div>
+                  }
           </Disclosure.Panel>
         </>
       )}

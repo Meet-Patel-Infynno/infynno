@@ -1,119 +1,116 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
+import {
+  fetchCars,
+  getBodyType,
+  getCars,
+  getCount,
+  getDriveTrains,
+  getExtColors,
+  getFeatures,
+  getFuelTypes,
+  getIntColors,
+  getMake,
+  getModels,
+  getPaginate,
+  getTransmissions,
+} from "../store/homePageSlice";
+import { wrapper } from "../store/store";
 
-export async function getServerSideProps() {
-  const res = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&year=2011,2021&return=count"
-  );
-  const data = await res.data;
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const cars = `https://autodigg.com/ad-api/cars/list?usedCar=false&car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&newCar=false`;
 
-  const cars = await axios.get(
-    `https://autodigg.com/ad-api/cars/list?usedCar=false&car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&newCar=false`
-  );
-  const allCars = await cars.data;
+    // const allCars = await cars.data;
 
-  const make = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?return=make"
-  );
-  const makes = await make.data;
+    const count =
+      "https://autodigg.com/ad-api/cars/list?car_type=Used+car,New+car,Certified+pre-owned&page=1&radius=100&year=2011,2021&return=count";
 
-  const model = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?make=&return=model"
-  );
-  const models = await model.data;
+    // const data = await res.data;
 
-  const bodytype = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?return=body_type"
-  );
-  const bodytypes = await bodytype.data;
+    const make = "https://autodigg.com/ad-api/cars/list?return=make";
 
-  const excolor = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=exterior_color"
-  );
-  const extcolors = await excolor.data;
+    // const makes = await make.data;
 
-  const intcolor = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=interior_color"
-  );
-  const intcolors = await intcolor.data;
+    const model = "https://autodigg.com/ad-api/cars/list?make=&return=model";
 
-  const transmission = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=transmission"
-  );
-  const transmissions = await transmission.data;
+    // const models = await model.data;
 
-  const dtrain = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=transmission"
-  );
-  const dtrains = await dtrain.data;
+    const bodytype = "https://autodigg.com/ad-api/cars/list?return=body_type";
 
-  const fuel = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=transmission"
-  );
-  const fuelType = await fuel.data;
+    // const bodytypes = await bodytype.data;
 
-  const feature = await axios.get(
-    "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=features"
-  );
-  const features = await feature.data;
+    const excolor =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=exterior_color";
 
-  return {
-    props: {
-      count: data,
-      allCars,
-      makes,
-      models,
-      bodytypes,
-      extcolors,
-      intcolors,
-      transmissions,
-      dtrains,
-      fuelType,
-      features,
-    },
-  };
-}
+    // const extcolors = await excolor.data;
 
-export default function Home({
-  count,
-  allCars,
-  makes,
-  models,
-  bodytypes,
-  intcolors,
-  extcolors,
-  transmissions,
-  dtrains,
-  fuelType,
-  features,
-}) {
-  const [items, setItems] = useState([]);
-  const [newCars, setNewCars] = useState(false);
+    const intcolor =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=interior_color";
 
-  console.log(newCars, "newcarssssss");
+    // const intcolors = await intcolor.data;
 
-  async function fetchCars(currentPage) {
-    const cars = await axios.get(
-      `https://autodigg.com/ad-api/cars/list?usedCar=false&car_type=Used+car,New+car,Certified+pre-owned&page=${currentPage}&radius=100&newCar=false`
-    );
-    const allCars = await cars.data;
-    setItems(allCars);
+    const transmission =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=transmission";
+
+    // const transmissions = await transmission.data;
+
+    const dtrain =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=drivetrain";
+
+    // const dtrains = await dtrain.data;
+
+    const fuel =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=fuel_type";
+
+    // const fuelType = await fuel.data;
+
+    const feature =
+      "https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&return=features";
+
+    // const features = await feature.data;
+
+    const data = await axios.all([
+      axios.get(cars),
+      axios.get(count),
+      axios.get(make),
+      axios.get(model),
+      axios.get(bodytype),
+      axios.get(excolor),
+      axios.get(intcolor),
+      axios.get(transmission),
+      axios.get(dtrain),
+      axios.get(fuel),
+      axios.get(feature),
+    ]);
+
+    store.dispatch(getCars(data[0].data));
+    store.dispatch(getCount(data[1].data.count));
+    store.dispatch(getMake(data[2].data));
+    store.dispatch(getModels(data[3].data));
+    store.dispatch(getBodyType(data[4].data));
+    store.dispatch(getExtColors(data[5].data));
+    store.dispatch(getIntColors(data[6].data));
+    store.dispatch(getTransmissions(data[7].data));
+    store.dispatch(getDriveTrains(data[8].data));
+    store.dispatch(getFuelTypes(data[9].data));
+    store.dispatch(getFeatures(data[10].data));
   }
+);
 
-  useEffect(() => {
-    setItems(allCars);
-  }, []);
+export default function Home() {
+  const { count, cars, page } = useSelector((state) => state.homePageSlice);
 
-  const handlePageClick = async (data) => {
-    console.log(data.selected, "dadadadada");
+  const dispatch = useDispatch();
 
+  const handlePageClick = (data) => {
     let currentPage = data.selected + 1;
-    fetchCars(currentPage);
+    dispatch(getPaginate(currentPage));
+    dispatch(fetchCars());
   };
-  console.log(makes, "makessss");
   return (
     <>
       <section className="Home mt-9 pl-[60px] flex flex-col justify-center items-center pr-[60px]">
@@ -124,29 +121,18 @@ export default function Home({
             </div>
             <div className="btitle">
               <div className="content font-bold text-[32px] leading-[44px] text-[#28293D]">
-                Showing {count && count.count} cars
+                Showing {count && count} cars
               </div>
               <div className="hbtn"></div>
             </div>
           </div>
           <div className="hbottom flex gap-6">
             <div className="sidebar">
-              <Sidebar
-                makes={makes}
-                models={models}
-                bodytypes={bodytypes}
-                extcolors={extcolors}
-                intcolors={intcolors}
-                transmissions={transmissions}
-                dtrains={dtrains}
-                fuelType={fuelType}
-                features={features}
-                {...{ newCars, setNewCars }}
-              />
+              <Sidebar />
             </div>
             <div className="card flex flex-col  items-center gap-6">
-              {items &&
-                items.map((data) => {
+              {cars &&
+                cars.map((data) => {
                   return (
                     <>
                       <Card cars={data}></Card>
@@ -160,7 +146,7 @@ export default function Home({
                   previousLabel="<"
                   marginPagesDisplayed={3}
                   pageRangeDisplayed={5}
-                  pageCount={Math.ceil(count.count / 20)}
+                  pageCount={Math.ceil(count / 20)}
                   containerClassName={
                     "flex justify-center items-center gap-x-[8px]"
                   }
@@ -184,7 +170,6 @@ export default function Home({
                     "text-[#FF8800] border-[2px] border-solid border-[#FF8800] bg-[#FFFFFF]"
                   }
                   onPageChange={handlePageClick}
-                  // renderOnZeroPageCount={null}
                 />
               </div>
               <div className="w-[984px] h-[1px] bg-[#E4E4EB] my-[50px]"></div>

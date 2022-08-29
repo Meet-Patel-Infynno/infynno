@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import homePageSlice, {
+  fetchCars,
+  getPaginate,
+  setMakeCars,
+  setmodelData,
+} from "../store/homePageSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-
-
-const MultiSelectDropDown = ({makes}) => {
+const MultiSelectDropDown = ({ makes }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPersons, setSelectedPersons] = useState([]);
   const [rotated, setRotate] = useState(false);
-
-  const people  = Object.keys(makes)
+  const { makeCars } = useSelector((state) => state.homePageSlice);
+  const dispatch = useDispatch();
+  const people = Object.keys(makes);
 
   function rotate() {
-    console.log("clickeddd");
     if (rotated) {
       setRotate(false);
     } else {
@@ -21,16 +26,19 @@ const MultiSelectDropDown = ({makes}) => {
   }
 
   function isSelected(value) {
-    return selectedPersons.find((el) => el === value) ? true : false;
+    return makeCars.find((el) => el === value) ? true : false;
   }
 
   function handleSelect(value) {
     if (!isSelected(value)) {
       const selectedPersonsUpdated = [
-        ...selectedPersons,
+        ...makeCars,
         people.find((el) => el === value),
       ];
-      setSelectedPersons(selectedPersonsUpdated);
+      dispatch(setMakeCars(selectedPersonsUpdated));
+      dispatch(setmodelData([]));
+      dispatch(getPaginate(1));
+      dispatch(fetchCars());
     } else {
       handleDeselect(value);
     }
@@ -38,8 +46,11 @@ const MultiSelectDropDown = ({makes}) => {
   }
 
   function handleDeselect(value) {
-    const selectedPersonsUpdated = selectedPersons.filter((el) => el !== value);
-    setSelectedPersons(selectedPersonsUpdated);
+    const selectedPersonsUpdated = makeCars.filter((el) => el !== value);
+    dispatch(setMakeCars(selectedPersonsUpdated));
+    dispatch(setmodelData([]));
+    dispatch(getPaginate(1));
+    dispatch(fetchCars());
     setIsOpen(true);
   }
   return (
@@ -48,7 +59,7 @@ const MultiSelectDropDown = ({makes}) => {
         <Listbox
           as="div"
           className="space-y-1"
-          value={selectedPersons}
+          value={makeCars}
           onChange={(value) => handleSelect(value)}
           open={isOpen}
         >
@@ -65,9 +76,7 @@ const MultiSelectDropDown = ({makes}) => {
                     open={isOpen}
                   >
                     <span className="block truncate">
-                      {selectedPersons.length < 1
-                        ? "Select Make"
-                        : `${selectedPersons}`}
+                      {makeCars.length < 1 ? "Select Make" : `${makeCars}`}
                     </span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                       <ChevronDownIcon

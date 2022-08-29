@@ -24,7 +24,6 @@ const Dropdown = () => {
   const [selected, setSelected] = useState(people[0]);
   const [rotated, setRotate] = useState(false);
   function rotate() {
-    console.log("clickeddd");
     if (rotated) {
       setRotate(false);
     } else {

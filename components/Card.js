@@ -1,19 +1,25 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
+import CardLoader from "./cardLoader";
+import MyModal from "./MyModal";
 
 const Card = (props) => {
-  // console.log(props.cars, "propsss");
   const router = useRouter();
+  const {isLoading} = useSelector((state)=>state.homePageSlice)
+
   return (
     <>
+      {isLoading?<CardLoader />:
+   
       <section
-        onClick={() => router.push(`/${props.cars.vin}`)}
+      onClick={() => router.push(`/${props.cars.vin}`)}
         className="card w-[984px] h-[330px] bg-[#FFFFFF] rounded-[10px] shadow-card-shadow overflow-hidden"
       >
         <div className="cmain w-full">
           <div className="ctop flex gap-6">
-            <div className="ctleft runded-tl-[10px] w-[360px] h-[254px]">
+            <div className="ctleft rounded-tl-[10px] w-[360px] h-[254px]">
               <Image
                 src={props.cars.photos?props.cars.photos[0]:"/defaultcar.png"}
                 alt="logo"
@@ -48,9 +54,9 @@ const Card = (props) => {
                   </div>
                 </div>
                 <div className="shadow-btn-shadow mb-6 gap-[2px] px-4 py-[6px] whitespace-nowrap  ctrbright card-btn w-[137px] h-[36px] text-white rounded-[10px] flex justify-center items-center">
-                  <button className="flex justify-center items-center w-full">
-                    Invite dealer
-                  </button>
+                  <div onClick={(e)=>e.stopPropagation()} className="flex justify-center items-center w-full">
+                    <MyModal></MyModal>
+                  </div>
                   <div className="flex justify-center item-center mt-1 w-full">
                     <Image src={"/send.png"} width={22} height={22}></Image>
                   </div>
@@ -80,6 +86,7 @@ const Card = (props) => {
           </div>
         </div>
       </section>
+       }
     </>
   );
 };

@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "../styles/globals.css";
+import { wrapper } from "../store/store";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -14,4 +15,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux( MyApp);

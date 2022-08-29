@@ -1,32 +1,58 @@
-import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { RiSendPlaneLine } from "react-icons/ri";
 import CheckBox from "./CheckBox";
-import Dropdown from "./Dropdown";
 import MultiSelectDropDown from "./MultiSelectDropDown";
 import { BsChevronDown } from "react-icons/bs";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Listdown from "./Listdown";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchCars,
+  getCarTypes,
+  getRadius,
+  setbodyTypeData,
+  setDriveTrainData,
+  setExtColorData,
+  setFeaturesData,
+  setFuelTypeData,
+  setIntColorData,
+  setmodelData,
+  setPrice,
+  setTransmssionsData,
+  setYear,
+} from "../store/homePageSlice";
 // import { Features } from "@headlessui/react/dist/utils/render";
 
-const Sidebar = ({
-  makes,
-  models,
-  bodytypes,
-  extcolors,
-  intcolors,
-  transmissions,
-  dtrains,
-  fuelType,
-  features,
-  newCars,
-  setNewCars,
-}) => {
-  console.log(Object.entries(features)[0][1], "sdebarrr");
+const Sidebar = () => {
+  const {
+    make,
+    models,
+    bodytypes,
+    extcolors,
+    intcolors,
+    transmissions,
+    dtrains,
+    fuelType,
+    features,
+    price,
+    year,
+    extcolorData,
+    intcolorData,
+    transmissionsData,
+    dtrainsData,
+    fuelTypeData,
+    featuresData,
+  } = useSelector((state) => state.homePageSlice);
   // const createSliderWithTooltip = Slider.createSliderWithTooltip;
   // const Range = createSliderWithTooltip(Slider.Range);
   const [more, setmore] = useState(false);
+  // const [carTypes, setCarType] = useState([]);
+  const { carTypes, radius, modelData, bodyTypeData } = useSelector(
+    (state) => state.homePageSlice
+  );
+  console.log(carTypes, "tpypes as");
+  const dispatch = useDispatch();
   const ratingData = {
     "⭐⭐⭐⭐⭐ only": 5,
     "⭐⭐⭐⭐and above": 4,
@@ -34,11 +60,17 @@ const Sidebar = ({
     "⭐⭐ and above ": 2,
     "⭐ and above": 1,
   };
+  // let array = [];
 
-  function getNewCars(event){
-      const newCars = event.target.checked;
-      setNewCars(newCars)
+  function getNewCars(cartype) {
+    let array = !cartype.target.checked
+      ? carTypes.filter((t) => t !== cartype.target.value)
+      : [...carTypes, cartype.target.value];
+    // console.log(array, "nesuseddfsgfs");
+    dispatch(getCarTypes(array));
+    dispatch(fetchCars());
   }
+  // console.log(carTypes, "newwwww");
 
   return (
     <>
@@ -58,8 +90,11 @@ const Sidebar = ({
               <div className="new flex gap-[10px] justify-start items-center">
                 <input
                   type="checkbox"
-                  value={"new"}
-                  onChange={(event)=>getNewCars(event)}
+                  value={"New Car"}
+                  checked={carTypes.includes("New Car")}
+                  // checked={true}
+                  // onChange={(newcar) => getNewCars(newcar)}
+                  onChange={getNewCars}
                   className="w-5 h-5 accent-[#28293D] bg-white rounded border-[2px] border-solid border-[#8F90A6]"
                   id="new"
                 />
@@ -73,6 +108,10 @@ const Sidebar = ({
               <div className="used flex gap-[10px] justify-start items-center">
                 <input
                   type="checkbox"
+                  checked={carTypes.includes("Used Car")}
+                  value={"Used Car"}
+                  onChange={getNewCars}
+                  // onChange={(usedcar) => getNewCars(usedcar)}
                   className="w-5 h-5 accent-[#28293D] bg-white rounded border-[2px] border-solid border-[#8F90A6]"
                   id="used"
                 />
@@ -104,11 +143,17 @@ const Sidebar = ({
                 Search within
               </div>
               <div className="brtitle font-semibold text-base leading-6  text-[#28293D]">
-                100 miles
+                {radius} miles
               </div>
             </div>
             <div className="bar">
-              <Slider></Slider>
+              <Slider
+                defaultValue={100}
+                min={20}
+                max={500}
+                onAfterChange={() => dispatch(fetchCars())}
+                onChange={(value) => dispatch(getRadius(value))}
+              ></Slider>
             </div>
             <div className="barbottomtitle flex justify-between items-center">
               <div className="bbltitle font-medium text-xs leading-4 text-[#28293D]">
@@ -129,7 +174,7 @@ const Sidebar = ({
               </div>
               <div className="mdropdown">
                 {/* <Dropdown></Dropdown> */}
-                <MultiSelectDropDown makes={makes}></MultiSelectDropDown>
+                <MultiSelectDropDown makes={make}></MultiSelectDropDown>
               </div>
             </div>
             <div className="model flex flex-col gap-[14px]">
@@ -144,7 +189,12 @@ const Sidebar = ({
                 {Object.entries(models).map(([key, value]) => {
                   return (
                     <>
-                      <CheckBox name={key} value={value}></CheckBox>
+                      <CheckBox
+                        name={key}
+                        state={modelData}
+                        stateFunction={setmodelData}
+                        value={value}
+                      ></CheckBox>
                     </>
                   );
                 })}
@@ -182,7 +232,12 @@ const Sidebar = ({
             {Object.entries(bodytypes).map(([key, value]) => {
               return (
                 <>
-                  <CheckBox name={key} value={value} />
+                  <CheckBox
+                    name={key}
+                    value={value}
+                    state={bodyTypeData}
+                    stateFunction={setbodyTypeData}
+                  />
                 </>
               );
             })}
@@ -195,11 +250,18 @@ const Sidebar = ({
               Price
             </div>
             <div className="brtitle font-semibold text-base leading-6  text-[#28293D]">
-              $0 - $1,000
+              $ {price[0]} - ${price[1]}
             </div>
           </div>
           <div className="bar">
-            <Slider range></Slider>
+            <Slider
+              defaultValue={[0, 100000]}
+              min={0}
+              max={100000}
+              onAfterChange={() => dispatch(fetchCars())}
+              onChange={(value) => dispatch(setPrice(value))}
+              range
+            ></Slider>
           </div>
           <div className="barbottomtitle flex justify-between items-center">
             <div className="bbltitle font-medium text-xs leading-4 text-[#28293D]">
@@ -217,11 +279,18 @@ const Sidebar = ({
               Make year
             </div>
             <div className="brtitle font-semibold text-base leading-6  text-[#28293D]">
-              2000 - 2010
+              {year[0]} - {year[1]}
             </div>
           </div>
           <div className="bar">
-            <Slider range></Slider>
+            <Slider
+              defaultValue={[1990, 2022]}
+              min={1990}
+              max={2022}
+              onAfterChange={() => dispatch(fetchCars())}
+              onChange={(value) => dispatch(setYear(value))}
+              range
+            ></Slider>
           </div>
           <div className="barbottomtitle flex justify-between items-center">
             <div className="bbltitle font-medium text-xs leading-4 text-[#28293D]">
@@ -260,32 +329,67 @@ const Sidebar = ({
             title={"Styles"}
             smt1={"EXTERIOR COLOR"}
             smtData1={extcolors}
+            state1={extcolorData}
+            stateFunction1={setExtColorData}
             smt2={"INTERIOR COLOR"}
             smtData2={intcolors}
+            state2={intcolorData}
+            stateFunction2={setIntColorData}
           ></Listdown>
           <Listdown
             title={"Performance"}
             smt1={"TRANSMISSION"}
             smtData1={transmissions}
+            state1={transmissionsData}
+            stateFunction1={setTransmssionsData}
             smt2={"DRIVE TRAIN"}
             smtData2={dtrains}
+            state2={dtrainsData}
+            stateFunction2={setDriveTrainData}
             smt3={"FUEL TYPE"}
             smtData3={fuelType}
+            state3={fuelTypeData}
+            stateFunction3={setFuelTypeData}
           ></Listdown>
           <Listdown
             title={"Features"}
-            smt1={Object.entries(features)[0][0]}
-            smtData1={Object.entries(features)[0][1]}
-            smt2={Object.entries(features)[1][0]}
-            smtData2={Object.entries(features)[1][1]}
-            smt3={Object.entries(features)[2][0]}
-            smtData3={Object.entries(features)[2][1]}
-            smt4={Object.entries(features)[3][0]}
-            smtData4={Object.entries(features)[3][1]}
-            smt5={Object.entries(features)[4][0]}
-            smtData5={Object.entries(features)[4][1]}
+            smt1={Object.entries(features)[0] && Object.entries(features)[0][0]}
+            smtData1={
+              Object.entries(features)[0] && Object.entries(features)[0][1]
+            }
+            state1={featuresData}
+            stateFunction1={setFeaturesData}
+            smt2={Object.entries(features)[1] && Object.entries(features)[1][0]}
+            smtData2={
+              Object.entries(features)[1] && Object.entries(features)[1][1]
+            }
+            state2={featuresData}
+            stateFunction2={setFeaturesData}
+            smt3={Object.entries(features)[2] && Object.entries(features)[2][0]}
+            smtData3={
+              Object.entries(features)[2] && Object.entries(features)[2][1]
+            }
+            state3={featuresData}
+            stateFunction3={setFeaturesData}
+            smt4={Object.entries(features)[3] && Object.entries(features)[3][0]}
+            smtData4={
+              Object.entries(features)[3] && Object.entries(features)[3][1]
+            }
+            state4={featuresData}
+            stateFunction4={setFeaturesData}
+            smt5={Object.entries(features)[4] && Object.entries(features)[4][0]}
+            smtData5={
+              Object.entries(features)[4] && Object.entries(features)[4][1]
+            }
+            state5={featuresData}
+            stateFunction5={setFeaturesData}
           ></Listdown>
-          <Listdown title={"Rating"} smtData1={ratingData}></Listdown>
+          <Listdown
+            title={"Rating"}
+            state1={null}
+            stateFunction1={null}
+            smtData1={ratingData}
+          ></Listdown>
           <Listdown title={"Contactless service"}></Listdown>
         </div>
       </section>
