@@ -40,14 +40,14 @@ export const fetchCars=createAsyncThunk(
             const url = `https://autodigg.com/ad-api/cars/list?features=${state.featuresData}&transmission=${state.transmissionsData}&fuel_type=${state.fuelTypeData}&drivetrain=${state.dtrainsData}&interior_color=${state.intcolorData}&exterior_color=${state.extcolorData}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&body_type=${state.bodyTypeData}&model=${state.modelData}&usedCar=false&car_type=${state.carTypes},Certified+pre-owned&make=${state.makeCars}&page=${state.page}&radius=${state.radius}&newCar=false`
             const countUrl = `https://autodigg.com/ad-api/cars/list?features=${state.featuresData}&fuel_type=${state.fuelTypeData}&drivetrain=${state.dtrainsData}&transmission=${state.transmissionsData}&interior_color=${state.intcolorData}&exterior_color=${state.extcolorData}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&body_type=${state.bodyTypeData}&model=${state.modelData}&usedCar=false&car_type=${state.carTypes},Certified+pre-owned&make=${state.makeCars}&page=${state.page}&radius=${state.radius}&newCar=false&return=count`
            
-            const modelUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=model`
-            const bodyTypeUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=body_type`
-            const extcolorUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=exterior_color`
-            const intcolorUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=interior_color`
-            const transmissionsUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=transmission`
-            const dtrainsUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=drivetrain`
-            const fuelTypeUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=fuel_type`
-            const featuresUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&return=features`
+            const modelUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=model`
+            const bodyTypeUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=body_type`
+            const extcolorUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=exterior_color`
+            const intcolorUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=interior_color`
+            const transmissionsUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=transmission`
+            const dtrainsUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=drivetrain`
+            const fuelTypeUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=fuel_type`
+            const featuresUrl = `https://autodigg.com/ad-api/cars/list?make=${state.makeCars}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&return=features`
            
            
            

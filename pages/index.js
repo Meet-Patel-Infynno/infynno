@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
+import NoCars from "../components/noCars";
 import {
   fetchCars,
   getBodyType,
@@ -108,16 +109,20 @@ export default function Home() {
               <Sidebar />
             </div>
             <div className="card flex flex-col  items-center gap-6">
-              {cars &&
+              {cars.length > 0 ? (
                 cars.map((data) => {
                   return (
                     <>
                       <Card cars={data}></Card>
                     </>
                   );
-                })}
+                })
+              ) : (
+                <NoCars />
+              )}
               <div className="pagiination mt-[50px]">
                 <ReactPaginate
+                  renderOnZeroPageCount={null}
                   breakLabel="..."
                   nextLabel=">"
                   previousLabel="<"
