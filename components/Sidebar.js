@@ -9,8 +9,17 @@ import Listdown from "./Listdown";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchCars,
+  getBodyType,
   getCarTypes,
+  getDriveTrains,
+  getExtColors,
+  getFeatures,
+  getFuelTypes,
+  getIntColors,
+  getMake,
+  getModels,
   getRadius,
+  getTransmissions,
   setbodyTypeData,
   setDriveTrainData,
   setExtColorData,
@@ -24,17 +33,10 @@ import {
 } from "../store/homePageSlice";
 // import { Features } from "@headlessui/react/dist/utils/render";
 
-const Sidebar = () => {
+const Sidebar = ({ Data }) => {
+  const dispatch = useDispatch();
+
   const {
-    make,
-    models,
-    bodytypes,
-    extcolors,
-    intcolors,
-    transmissions,
-    dtrains,
-    fuelType,
-    features,
     price,
     year,
     extcolorData,
@@ -43,16 +45,15 @@ const Sidebar = () => {
     dtrainsData,
     fuelTypeData,
     featuresData,
+    carTypes,
+    radius,
+    modelData,
+    bodyTypeData,
   } = useSelector((state) => state.homePageSlice);
-  // const createSliderWithTooltip = Slider.createSliderWithTooltip;
-  // const Range = createSliderWithTooltip(Slider.Range);
+
   const [more, setmore] = useState(false);
-  // const [carTypes, setCarType] = useState([]);
-  const { carTypes, radius, modelData, bodyTypeData } = useSelector(
-    (state) => state.homePageSlice
-  );
+
   console.log(carTypes, "tpypes as");
-  const dispatch = useDispatch();
   const ratingData = {
     "⭐⭐⭐⭐⭐ only": 5,
     "⭐⭐⭐⭐and above": 4,
@@ -60,7 +61,6 @@ const Sidebar = () => {
     "⭐⭐ and above ": 2,
     "⭐ and above": 1,
   };
-  // let array = [];
 
   function getNewCars(cartype) {
     let array = !cartype.target.checked
@@ -174,7 +174,7 @@ const Sidebar = () => {
               </div>
               <div className="mdropdown">
                 {/* <Dropdown></Dropdown> */}
-                <MultiSelectDropDown makes={make}></MultiSelectDropDown>
+                <MultiSelectDropDown makes={Data.makes}></MultiSelectDropDown>
               </div>
             </div>
             <div className="model flex flex-col gap-[14px]">
@@ -186,18 +186,19 @@ const Sidebar = () => {
                   more ? "h-auto" : "h-[165px]"
                 }`}
               >
-                {Object.entries(models).map(([key, value]) => {
-                  return (
-                    <>
-                      <CheckBox
-                        name={key}
-                        state={modelData}
-                        stateFunction={setmodelData}
-                        value={value}
-                      ></CheckBox>
-                    </>
-                  );
-                })}
+                {Data.models &&
+                  Object.entries(Data.models).map(([key, value]) => {
+                    return (
+                      <>
+                        <CheckBox
+                          name={key}
+                          state={modelData}
+                          stateFunction={setmodelData}
+                          value={value}
+                        ></CheckBox>
+                      </>
+                    );
+                  })}
               </div>
             </div>
             <div
@@ -229,18 +230,19 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="bdcheckbox flex flex-col gap-4 justify-center items-start">
-            {Object.entries(bodytypes).map(([key, value]) => {
-              return (
-                <>
-                  <CheckBox
-                    name={key}
-                    value={value}
-                    state={bodyTypeData}
-                    stateFunction={setbodyTypeData}
-                  />
-                </>
-              );
-            })}
+            {Data.bodyType &&
+              Object.entries(Data.bodyType).map(([key, value]) => {
+                return (
+                  <>
+                    <CheckBox
+                      name={key}
+                      value={value}
+                      state={bodyTypeData}
+                      stateFunction={setbodyTypeData}
+                    />
+                  </>
+                );
+              })}
           </div>
         </div>
         <div className="line w-[280px] h-[1px] bg-[#E4E4EB] rounded-[10px] my-[16px]"></div>
@@ -328,62 +330,86 @@ const Sidebar = () => {
           <Listdown
             title={"Styles"}
             smt1={"EXTERIOR COLOR"}
-            smtData1={extcolors}
+            smtData1={Data.extColors}
             state1={extcolorData}
             stateFunction1={setExtColorData}
             smt2={"INTERIOR COLOR"}
-            smtData2={intcolors}
+            smtData2={Data.intColors}
             state2={intcolorData}
             stateFunction2={setIntColorData}
           ></Listdown>
           <Listdown
             title={"Performance"}
             smt1={"TRANSMISSION"}
-            smtData1={transmissions}
+            smtData1={Data.transmissions}
             state1={transmissionsData}
             stateFunction1={setTransmssionsData}
             smt2={"DRIVE TRAIN"}
-            smtData2={dtrains}
+            smtData2={Data.dtrains}
             state2={dtrainsData}
             stateFunction2={setDriveTrainData}
             smt3={"FUEL TYPE"}
-            smtData3={fuelType}
+            smtData3={Data.fuelType}
             state3={fuelTypeData}
             stateFunction3={setFuelTypeData}
           ></Listdown>
-          <Listdown
-            title={"Features"}
-            smt1={Object.entries(features)[0] && Object.entries(features)[0][0]}
-            smtData1={
-              Object.entries(features)[0] && Object.entries(features)[0][1]
-            }
-            state1={featuresData}
-            stateFunction1={setFeaturesData}
-            smt2={Object.entries(features)[1] && Object.entries(features)[1][0]}
-            smtData2={
-              Object.entries(features)[1] && Object.entries(features)[1][1]
-            }
-            state2={featuresData}
-            stateFunction2={setFeaturesData}
-            smt3={Object.entries(features)[2] && Object.entries(features)[2][0]}
-            smtData3={
-              Object.entries(features)[2] && Object.entries(features)[2][1]
-            }
-            state3={featuresData}
-            stateFunction3={setFeaturesData}
-            smt4={Object.entries(features)[3] && Object.entries(features)[3][0]}
-            smtData4={
-              Object.entries(features)[3] && Object.entries(features)[3][1]
-            }
-            state4={featuresData}
-            stateFunction4={setFeaturesData}
-            smt5={Object.entries(features)[4] && Object.entries(features)[4][0]}
-            smtData5={
-              Object.entries(features)[4] && Object.entries(features)[4][1]
-            }
-            state5={featuresData}
-            stateFunction5={setFeaturesData}
-          ></Listdown>
+          {Data.features && (
+            <Listdown
+              title={"Features"}
+              smt1={
+                Data.features &&
+                Object.entries(Data.features)[0] &&
+                Object.entries(Data.features)[0][0]
+              }
+              smtData1={
+                Data.features &&
+                Object.entries(Data.features)[0] &&
+                Object.entries(Data.features)[0][1]
+              }
+              state1={featuresData}
+              stateFunction1={setFeaturesData}
+              smt2={
+                Object.entries(Data.features)[1] &&
+                Object.entries(Data.features)[1][0]
+              }
+              smtData2={
+                Object.entries(Data.features)[1] &&
+                Object.entries(Data.features)[1][1]
+              }
+              state2={featuresData}
+              stateFunction2={setFeaturesData}
+              smt3={
+                Object.entries(Data.features)[2] &&
+                Object.entries(Data.features)[2][0]
+              }
+              smtData3={
+                Object.entries(Data.features)[2] &&
+                Object.entries(Data.features)[2][1]
+              }
+              state3={featuresData}
+              stateFunction3={setFeaturesData}
+              smt4={
+                Object.entries(Data.features)[3] &&
+                Object.entries(Data.features)[3][0]
+              }
+              smtData4={
+                Object.entries(Data.features)[3] &&
+                Object.entries(Data.features)[3][1]
+              }
+              state4={featuresData}
+              stateFunction4={setFeaturesData}
+              smt5={
+                Object.entries(Data.features)[4] &&
+                Object.entries(Data.features)[4][0]
+              }
+              smtData5={
+                Object.entries(Data.features)[4] &&
+                Object.entries(Data.features)[4][1]
+              }
+              state5={featuresData}
+              stateFunction5={setFeaturesData}
+            ></Listdown>
+          )}
           <Listdown
             title={"Rating"}
             state1={null}

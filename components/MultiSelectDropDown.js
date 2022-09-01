@@ -15,7 +15,7 @@ const MultiSelectDropDown = ({ makes }) => {
   const [rotated, setRotate] = useState(false);
   const { makeCars } = useSelector((state) => state.homePageSlice);
   const dispatch = useDispatch();
-  const people = Object.keys(makes);
+  const people = makes && Object.keys(makes);
 
   function rotate() {
     if (rotated) {
@@ -115,7 +115,7 @@ const MultiSelectDropDown = ({ makes }) => {
                     static
                     className="absolute top-[-280px] mt-1 h-[90vh] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                   >
-                    {people.map((person) => {
+                    {people && people.map((person) => {
                       const selected = isSelected(person);
                       return (
                         <Listbox.Option key={person} value={person}>

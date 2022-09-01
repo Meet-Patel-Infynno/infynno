@@ -1,18 +1,21 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "../styles/globals.css";
-import { wrapper } from "../store/store";
+import store, { wrapper } from "../store/store";
+import { Provider } from "react-redux";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <div className="w-full">
-        <Navbar></Navbar>
-        <Component {...pageProps} />
-        <Footer></Footer>
-      </div>
+      <Provider store={store}>
+        <div className="w-full">
+          <Navbar></Navbar>
+          <Component {...pageProps} />
+          <Footer></Footer>
+        </div>
+      </Provider>
     </>
   );
 }
 
-export default wrapper.withRedux( MyApp);
+export default MyApp;

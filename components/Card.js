@@ -43,11 +43,7 @@ const Card = ({cars}) => {
               <div className="ctrbottom flex gap-80 w-full">
                 <div className="ctrbleft flex justify-center items-center gap-2">
                   <div className="font-semibold text-[28px] leadin-[38px] text-[#28293D]">
-                    {new Intl.NumberFormat("en-IN", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumSignificantDigits: 3,
-                    }).format(cars.price)}
+                    ${cars.price.toLocaleString("en-US")}
                   </div>
                   <div className="rounded-full text-white italic text-xs bg-[#8F90A6] w-4 h-4 flex justify-center items-center">
                     i

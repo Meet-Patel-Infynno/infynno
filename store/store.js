@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import homePageSlice from "./homePageSlice";
 
-export const makeStore = ()=> configureStore({
+ const store = configureStore({
     reducer:{
         homePageSlice:homePageSlice
     },
@@ -13,4 +13,6 @@ export const makeStore = ()=> configureStore({
     devTools:true
 })
 
-export const wrapper = createWrapper(makeStore)
+// export const wrapper = createWrapper(makeStore)
+
+export default store;

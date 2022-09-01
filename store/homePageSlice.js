@@ -162,22 +162,6 @@ const homePageSlice = createSlice({
         },
     },
     extraReducers:{
-        [HYDRATE]:(state,action)=>{
-            state.cars = action.payload.homePageSlice.cars
-            state.count = action.payload.homePageSlice.count
-            state.make = action.payload.homePageSlice.make
-            state.models = action.payload.homePageSlice.models
-            state.bodytypes = action.payload.homePageSlice.bodytypes
-            state.extcolors = action.payload.homePageSlice.extcolors
-            state.intcolors = action.payload.homePageSlice.intcolors
-            state.transmissions = action.payload.homePageSlice.transmissions
-            state.dtrains = action.payload.homePageSlice.dtrains
-            state.features = action.payload.homePageSlice.features
-            state.fuelType = action.payload.homePageSlice.fuelType
-            state.page = action.payload.homePageSlice.page
-            state.carTypes = action.payload.homePageSlice.carTypes
-            
-        },
         [fetchCars.pending]:(state , action)=>{
             state.isLoading = true
         },
