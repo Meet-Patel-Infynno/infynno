@@ -9,17 +9,8 @@ import Listdown from "./Listdown";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchCars,
-  getBodyType,
   getCarTypes,
-  getDriveTrains,
-  getExtColors,
-  getFeatures,
-  getFuelTypes,
-  getIntColors,
-  getMake,
-  getModels,
   getRadius,
-  getTransmissions,
   setbodyTypeData,
   setDriveTrainData,
   setExtColorData,
@@ -49,7 +40,20 @@ const Sidebar = ({ Data }) => {
     radius,
     modelData,
     bodyTypeData,
-  } = useSelector((state) => state.homePageSlice);
+  } = useSelector((state) => ({
+    price: state.homePageSlice.price,
+    year: state.homePageSlice.year,
+    extcolorData: state.homePageSlice.extcolorData,
+    intcolorData: state.homePageSlice.intcolorData,
+    transmissionsData: state.homePageSlice.transmissionsData,
+    dtrainsData: state.homePageSlice.dtrainsData,
+    fuelTypeData: state.homePageSlice.fuelTypeData,
+    featuresData: state.homePageSlice.featuresData,
+    carTypes: state.homePageSlice.carTypes,
+    radius: state.homePageSlice.radius,
+    modelData: state.homePageSlice.modelData,
+    bodyTypeData: state.homePageSlice.bodyTypeData,
+  }));
 
   const [more, setmore] = useState(false);
 
@@ -66,11 +70,10 @@ const Sidebar = ({ Data }) => {
     let array = !cartype.target.checked
       ? carTypes.filter((t) => t !== cartype.target.value)
       : [...carTypes, cartype.target.value];
-    // console.log(array, "nesuseddfsgfs");
+
     dispatch(getCarTypes(array));
     dispatch(fetchCars());
   }
-  // console.log(carTypes, "newwwww");
 
   return (
     <>

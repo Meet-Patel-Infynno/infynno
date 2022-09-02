@@ -4,24 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
 import NoCars from "../components/noCars";
-import {
-  fetchCars,
-  getBodyType,
-  getCars,
-  getCount,
-  getDriveTrains,
-  getExtColors,
-  getFeatures,
-  getFuelTypes,
-  getIntColors,
-  getMake,
-  getModels,
-  getPaginate,
-  getTransmissions,
-} from "../store/homePageSlice";
-import { wrapper } from "../store/store";
+import { fetchCars, getPaginate } from "../store/homePageSlice";
+// import { wrapper } from "../store/store";
 import { useEffect, useState } from "react";
-import CardLoader from "../components/cardLoader";
 
 // export const getServerSideProps = wrapper.getServerSideProps(
 //   (store) => async () => {
@@ -103,7 +88,6 @@ export default function Home(props) {
   const {
     cars,
     count,
-    make,
     models,
     bodytypes,
     extcolors,
@@ -112,7 +96,18 @@ export default function Home(props) {
     dtrains,
     fuelType,
     features,
-  } = useSelector((state) => state.homePageSlice);
+  } = useSelector((state) => ({
+    cars: state.homePageSlice.cars,
+    count: state.homePageSlice.count,
+    models: state.homePageSlice.models,
+    bodytypes: state.homePageSlice.bodytypes,
+    extcolors: state.homePageSlice.extcolors,
+    intcolors: state.homePageSlice.intcolors,
+    transmissions: state.homePageSlice.transmissions,
+    dtrains: state.homePageSlice.dtrains,
+    fuelType: state.homePageSlice.fuelType,
+    features: state.homePageSlice.features,
+  }));
 
   const dispatch = useDispatch();
   const [data, setData] = useState({
