@@ -7,6 +7,7 @@ import NoCars from "../components/noCars";
 import { fetchCars, getPaginate } from "../store/homePageSlice";
 // import { wrapper } from "../store/store";
 import { useEffect, useState } from "react";
+import CardLoader from "../components/cardLoader";
 
 // export const getServerSideProps = wrapper.getServerSideProps(
 //   (store) => async () => {
@@ -96,6 +97,7 @@ export default function Home(props) {
     dtrains,
     fuelType,
     features,
+    isLoading,
   } = useSelector((state) => ({
     cars: state.homePageSlice.cars,
     count: state.homePageSlice.count,
@@ -107,6 +109,7 @@ export default function Home(props) {
     dtrains: state.homePageSlice.dtrains,
     fuelType: state.homePageSlice.fuelType,
     features: state.homePageSlice.features,
+    isLoading: state.homePageSlice.isLoading,
   }));
 
   const dispatch = useDispatch();
@@ -175,10 +178,22 @@ export default function Home(props) {
                 data.cars.map((data) => {
                   return (
                     <>
-                      <Card cars={data}></Card>
+                      <Card cars={data} />
                     </>
                   );
                 })
+              ) : isLoading ? (
+                <>
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                  <CardLoader />
+                </>
               ) : (
                 <NoCars />
               )}
