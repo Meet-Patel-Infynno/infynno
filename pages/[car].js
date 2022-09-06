@@ -32,11 +32,16 @@ const Car = ({ carDetails }) => {
       <Head>
         <meta property="og:image" content={carDetails.photos[0]} />
 
-        <meta name="og:title" property="og:title" content="Cars" />
+        <meta
+          name="og:title"
+          property="og:title"
+          content={`${carDetails.make}|${carDetails.model}`}
+        />
 
         <meta
           property="og:description"
-          content="A full description of the page."
+          content={`${carDetails.dealership} • ${carDetails.milage}
+          ${carDetails.exterior_color}`}
         />
 
         <meta property="og:image:width" content="1200" />
