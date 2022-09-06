@@ -71,7 +71,7 @@ const Car = ({ carDetails }) => {
                   <RWebShare
                     data={{
                       text: "Like humans, flamingos make friends for life",
-                      url: "http://localhost:3000/KL8CB6SA3NC026445",
+                      url: "https://infynno-3zbu9ji3l-meet-patel1501.vercel.app/KL8CB6SA3NC026445",
                       title: "Share this article on Flamingos",
                     }}
                     onClick={() => console.info("share successful!")}
