@@ -35,12 +35,12 @@ const Car = ({ carDetails }) => {
         <meta
           name="og:title"
           property="og:title"
-          content={`${carDetails.make}|${carDetails.model}`}
+          content={`${carDetails.make} ${carDetails.model}`}
         />
 
         <meta
           property="og:description"
-          content={`${carDetails.dealership} • ${carDetails.milage}
+          content={`${carDetails.dealership} 
           ${carDetails.exterior_color}`}
         />
 
@@ -74,11 +74,11 @@ const Car = ({ carDetails }) => {
                 </div>
                 <div>
                   <RWebShare
-                    data={{
-                      text: "Like humans, flamingos make friends for life",
-                      url: "https://infynno-3zbu9ji3l-meet-patel1501.vercel.app/KL8CB6SA3NC026445",
-                      title: "Share this article on Flamingos",
-                    }}
+                    // data={{
+                    //   text: "Like humans, flamingos make friends for life",
+                    //   url: "https://infynno-3zbu9ji3l-meet-patel1501.vercel.app/KL8CB6SA3NC026445",
+                    //   title: "Share this article on Flamingos",
+                    // }}
                     onClick={() => console.info("share successful!")}
                   >
                     <button className="share-btn">Share</button>
