@@ -32,7 +32,7 @@ const Car = ({ carDetails }) => {
       <Head>
         <meta property="og:image" content={carDetails.photos[0]} />
 
-        <meta property="og:title" content="Cars" />
+        <meta name="og:title" property="og:title" content="Cars" />
 
         <meta
           property="og:description"
