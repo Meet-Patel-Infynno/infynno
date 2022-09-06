@@ -34,7 +34,7 @@ const Car = ({ carDetails }) => {
 
         <meta
           property="og:title"
-          content={`${carDetails.make}|${carDetails.model}`}
+          content={`${carDetails.make} ${carDetails.model}`}
         />
 
         <meta
