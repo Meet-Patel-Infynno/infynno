@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import Gallery from "../components/Gallery";
+import Head from "next/head";
+import { RWebShare } from "react-web-share";
 
 export async function getServerSideProps(context) {
   const { car } = context.params;
@@ -27,6 +29,20 @@ const Car = ({ carDetails }) => {
 
   return (
     <>
+      <Head>
+        <meta property="og:image" content={carDetails.photos[0]} />
+
+        <meta property="og:title" content="Cars" />
+
+        <meta
+          property="og:description"
+          content="A full description of the page."
+        />
+
+        <meta property="og:image:width" content="1200" />
+
+        <meta property="og:image:height" content="630" />
+      </Head>
       <section className="detail max-w-[1520px] mx-auto">
         <div className="dmain">
           <div className="d-top">
@@ -50,6 +66,18 @@ const Car = ({ carDetails }) => {
                   <div className="font-normal text-base leading-6 tracking-[0.2px] text-[#8F90A6]">
                     {carDetails.city}, {carDetails.state}
                   </div>
+                </div>
+                <div>
+                  <RWebShare
+                    data={{
+                      text: "Like humans, flamingos make friends for life",
+                      url: "http://localhost:3000/KL8CB6SA3NC026445",
+                      title: "Share this article on Flamingos",
+                    }}
+                    onClick={() => console.info("share successful!")}
+                  >
+                    <button className="share-btn">Share</button>
+                  </RWebShare>
                 </div>
               </div>
               <div className="dti-right flex justify-center items-center gap-6">
