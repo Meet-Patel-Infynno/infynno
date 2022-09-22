@@ -46,7 +46,7 @@ module.exports = {
       backgroundImage: {
         "gradient-main": "linear-gradient(180deg, #FFEDE1 0%, #E5F9FE 100%)",
         "back-image-welcome": "url('../assets/images/back-welcome.svg')",
-        "contact-image": "url(../assets/images/contact-us.svg)",
+        "contact-image": "url('../assets/images/contact-us.svg')",
       },
       borderRadius: {
         "md": "5px",
