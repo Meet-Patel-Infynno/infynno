@@ -101,7 +101,7 @@ const Home = () => {
       </section>
       <section className="w-full mt-14 md:mt-20 lg:mt-36 flex flex-col justify-center items-center gap-8 md:gap-20">
         <div className="flex flex-col justify-center gap-2 md:gap-10 items-center max-w-xl text-center">
-          <div className="xs:px-5">
+          <div className="xs:px-5 md:px-0">
             <h2 className="uppercase font-josefin font-bold md:text-4xl text-black">
               OUR AWARD WINNER HAIR CUT EXPARTS FOR YOU
             </h2>
