@@ -1,21 +1,8 @@
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import "../styles/globals.css";
-import store, { wrapper } from "../store/store";
-import { Provider } from "react-redux";
+import '../styles/globals.css';
+import Layout from '../components/layout/Layout';
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Provider store={store}>
-        <div className="w-full">
-          <Navbar></Navbar>
-          <Component {...pageProps} />
-          <Footer></Footer>
-        </div>
-      </Provider>
-    </>
-  );
+const MyApp = ({ Component, pageProps }) => {
+  return <Layout> <Component {...pageProps} /> </Layout> 
 }
 
-export default MyApp;
+export default MyApp
