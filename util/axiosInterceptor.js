@@ -5,6 +5,7 @@ const interceptor = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://infynno-9h1kudqfc-meet-patel1501.vercel.app/",
   },
 });
 
