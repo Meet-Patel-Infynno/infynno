@@ -61,6 +61,7 @@ module.exports = {
         "appointment-form": "linear-gradient(90deg, #FFEDE1 0%, #FAFEFF 100%)",
         "salon-card-back": "linear-gradient(90deg, #FFF0E5 0%, #F8FEFF 100%)",
         "back-image-welcome": "url('../assets/images/back-welcome.svg')",
+        "contact-image": "url('../assets/images/contact-us.svg')",
         "testimonial-back": "url('../assets/images/testimonial-back.svg')",
         "header-back": "url('../assets/images/header-back.svg')",
         "blog-back": "url('../assets/images/blog.svg')",
