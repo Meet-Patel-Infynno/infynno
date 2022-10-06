@@ -45,3 +45,6 @@ nav a:hover {
 .slick-list {
   @apply pb-20;
 }
+.bg-contact-image {
+  background-image: url("../assets/images/contact-us.svg");
+}
