@@ -25,7 +25,7 @@ export const forgotPasswordValidation = Yup.object({
   email: Yup.string().email("Invalid email address").required("Required"),
 });
 
-export const resetValidation = Yup.object().shape({
+export const resetValidation = Yup.object({
   password: Yup.string()
     .min(8, "Password must be 8 characters long")
     .max(20, "Password must not be more then 20 characters")
@@ -37,4 +37,19 @@ export const resetValidation = Yup.object().shape({
     [Yup.ref("password"), null],
     "Password must be same"
   ),
+});
+
+export const appointmentValidation = Yup.object({
+  name: Yup.string()
+    .min(4, "Name must be 4 characters long")
+    .max(25, "Name must not be more then 25 characters")
+    .required("Required"),
+  date: Yup.date()
+    .nullable()
+    .typeError("Please Enter a Valid Date")
+    .required("Required"),
+  time: Yup.date().nullable().required("Required"),
+  services: Yup.array().required("Required"),
+  location: Yup.string().required("Required"),
+  barber: Yup.string().nullable().required("Required"),
 });

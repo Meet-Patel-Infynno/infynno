@@ -1,24 +1,29 @@
 import { Form, Formik } from "formik";
+import Link from "next/link";
 import React from "react";
 import Button from "../components/form/Button";
 import InputField from "../components/form/InputField";
 import { Logo } from "../components/icons";
+import MainNav from "../components/layout/MainNav";
 import { resetValidation } from "../util/validationSchema";
 
 const ContactUs = () => {
   const handleResetSubmit = (val) => {};
   return (
-    <section className="flex w-full justify-center 3xl:max-w-screen-2xl mx-auto">
+    <section className="flex w-full justify-center 3xl:max-w-screen-3xl mx-auto">
       <div className="bg-contact-image md:max-w-654 hidden md:block md:w-full backdrop-blur-35 md:px-10 xl:px-20 py-14">
-        <Logo color="#FF6D04" />
+        <Link href="/">
+          <a>
+            <Logo color="#FF6D04" />
+          </a>
+        </Link>
       </div>
       <div className="flex flex-col px-8 w-full py-16 gap-16">
-        <div className="w-full xl:flex hidden justify-center font-josefin gap-11 font-normal text-2xl leading-6 text-black">
-          <div className="cursor-pointer">Home</div>
-          <div className="cursor-pointer">Services</div>
-          <div className="cursor-pointer">Blog</div>
-          <div className="cursor-pointer">Contact Us </div>
-        </div>
+        <MainNav
+          showAuthButtons={false}
+          className="font-josefin w-max justify-start md:justify-center font-normal text-2xl leading-6 !text-black md:w-full gap-11"
+          menuIconClassName="text-black text-10"
+        />
         <div className="flex justify-center flex-col items-center gap-6 md:gap-10">
           <div className="flex flex-col gap-4 md:gap-6 justify-center max-w-xl">
             <div className="font-semibold text-black font-poppins text-xl xs:text-2xl md:text-3xl xl:text-4xl xl:pr-32">

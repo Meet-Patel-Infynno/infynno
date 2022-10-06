@@ -30,6 +30,18 @@ body {
 .testimonial-slider .slick-dots {
   @apply pt-11 md:pt-24 relative pb-8;
 }
-/* .slide-container span {
-  @apply !overflow-hidden;
-} */
+nav a.active {
+  @apply after:content-blank after:w-full after:absolute after:h-1 after:bg-orange-500 after:-bottom-1 after:left-0;
+}
+nav a:hover {
+  @apply text-orange-500;
+}
+.salon-grid-slider .slick-slide > div {
+  @apply flex justify-center;
+}
+.salon-grid-slider .slick-dots {
+  @apply mt-20;
+}
+.slick-list {
+  @apply pb-20;
+}

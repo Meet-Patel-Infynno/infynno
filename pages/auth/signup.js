@@ -1,6 +1,5 @@
 import React from "react";
 import { User, Logo, Lock, Mail } from "../../components/icons";
-import SocialAuth from "../../components/auth/SocialAuth";
 import { Formik, Form } from "formik";
 import { signupValidation } from "../../util/validationSchema";
 import InputField from "../../components/form/InputField";
@@ -9,24 +8,41 @@ import Link from "next/link";
 import CopyRight from "../../components/layout/CopyRight";
 import Image from "next/image";
 import WelcomeImage from "../../assets/images/welcomeImage.svg";
+import { registerUser } from "../../redux/reducers/AuthenticationSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
-  const handleSignupSubmit = (val) => {};
+  const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state) => state.authentication.user_data.isLoading
+  );
+  const handleSignupSubmit = (val) => {
+    dispatch(registerUser(val));
+  };
+
   return (
-    <div className="flex max-w-screen-2xl 2xl:h-auto 2xl:mx-auto mt-0 2xl:mt-16">
+    <div className="flex">
       <div className="bg-orange-500 w-full max-w-2xl md:min-h-auth-screen 2xl:min-h-fit relative bg-back-image-welcome bg-center bg-cover lg:flex items-center justify-center px-16 hidden">
         <div className="absolute top-14 left-16">
-          <Logo color="white" />
+          <Link href="/">
+            <a>
+              <Logo color="white" />
+            </a>
+          </Link>
         </div>
         <div className="h-auto w-full max-w-lg ">
           <Image src={WelcomeImage} width="528" height="530" alt="background" />
         </div>
       </div>
-      <div className="w-full flex justify-center items-center flex-col gap-28">
+      <div className="w-full flex justify-center items-center flex-col lg:gap-28">
         <div className="w-full flex justify-center mt-12 lg:hidden">
-          <Logo color="#FF6D04" />
+          <Link href="/">
+            <a>
+              <Logo color="#FF6D04" />
+            </a>
+          </Link>
         </div>
-        <div className="lg:min-h-auth-screen 2xl:min-h-fit px-6 sm:p-0 flex justify-center items-center lg:mt-28">
+        <div className="mb-28 lg:mb-0 lg:min-h-auth-screen 2xl:min-h-fit px-6 sm:p-0 flex justify-center items-center lg:mt-28">
           <div className="mx-auto w-full sm:w-max flex flex-col">
             <div className="mb-16 text-center w-full mt-16 lg:mt-0">
               <h2 className="font-semibold text-3xl md:text-4xl leading-56 tracking-wide text-black-600 font-poppins">
@@ -63,17 +79,20 @@ const Signup = () => {
                   placeholder="Password"
                   className="bg-transparent focus:outline-none font-medium text-base leading-4 tracking-wide w-full"
                 />
-                <Button className="py-3" type="submit">
-                  Create account
+                <Button
+                  className="py-3 disabled:bg-gray-500"
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  Create Account
                 </Button>
               </Form>
             </Formik>
-            <SocialAuth />
             <div className="w-full max-w-sm mx-auto">
               <p className="font-light text-sm sm:text-base leading-6 tracking-wide text-black-600 mt-4">
                 Already have an account?
                 <Link href="/auth/login">
-                  <a className="text-orange-500">Sign In</a>
+                  <a className="text-orange-500"> Sign In</a>
                 </Link>
               </p>
             </div>

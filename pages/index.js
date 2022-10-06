@@ -13,7 +13,7 @@ import HomeSlider from "../components/home/HomeSlider";
 import TestimonialSlider from "../components/home/TestimonialSlider";
 
 const Home = () => {
-  const array = [
+  const categories = [
     "Hair cut",
     "Facial",
     "Hair colors",
@@ -64,7 +64,7 @@ const Home = () => {
           </div>
           <div className="card shadow-service-shadow flex flex-col justify-center items-center gap-12 lg:gap-28 rounded-lg lg:max-w-5xl bg-gradient-main px-6 lg:px-24 py-6 md:py-10 lg:py-24 mt-3 md:mt-16">
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 lg:gap-x-20 gap-y-4 md:gap-y-10 lg:gap-y-20 w-full lg:max-w-5xl">
-              {array.map((data, index) => {
+              {categories.map((data, index) => {
                 return (
                   <div
                     className="flex min-w-fit max-w-md justify-start gap-4 lg:gap-9 items-center"
@@ -79,8 +79,8 @@ const Home = () => {
                         alt="hair"
                       />
                     </div>
-                    <div>
-                      <p className="font-josefin font-normal whitespace-nowrap md:text-2xl text-black">
+                    <div className="xs:max-w-180 max-w-100" title={data}>
+                      <p className="font-josefin truncate font-normal whitespace-nowrap md:text-2xl text-black">
                         {data}
                       </p>
                     </div>
@@ -101,7 +101,7 @@ const Home = () => {
       </section>
       <section className="w-full mt-14 md:mt-20 lg:mt-36 flex flex-col justify-center items-center gap-8 md:gap-20">
         <div className="flex flex-col justify-center gap-2 md:gap-10 items-center max-w-xl text-center">
-          <div className="xs:px-5">
+          <div className="xs:px-5 md:px-0">
             <h2 className="uppercase font-josefin font-bold md:text-4xl text-black">
               OUR AWARD WINNER HAIR CUT EXPARTS FOR YOU
             </h2>
@@ -114,7 +114,6 @@ const Home = () => {
               <Image src={expert1Image} width="304" height="386" alt="expert" />
             </div>
             <div className="relative -top-10 flex justify-center items-center">
-              {/* <Slate className="text-gray-400"></Slate> */}
               <Image src={slateImage} width="332" height="86" alt="slate" />
               <div className="absolute md:top-2 flex flex-col items-center justify-center">
                 <p className="font-josefin font-normal text-xs md:text-base text-white">

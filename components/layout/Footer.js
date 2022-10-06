@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { CardDiscover, CardVisa, CreditCard, FaceBook, Instagram, LinkedIn, Logo, Twitter } from "../icons";
 import CopyRight from "./CopyRight";
@@ -9,7 +10,11 @@ const Footer = ({ showFooter }) => {
         {showFooter && (
           <div className="mt-32 mb-24 flex flex-col justify-center items-center gap-11 px-8 md:px-0">
             <div>
-              <Logo color="#FF6D04" />
+              <Link href="/">
+                <a>
+                  <Logo color="#FF6D04" />
+                </a>
+              </Link>
             </div>
             <div className="w-full md:max-w-2xl max-w-md mx-auto">
               <p className="font-light text-sm md:text-xl text-center leading-5">
@@ -18,8 +23,10 @@ const Footer = ({ showFooter }) => {
                 and scrambled.`}
               </p>
             </div>
-            <div className="text-center" >
-              <p className="font-normal text-black text-lg md:text-2xl leading-6">Connect with us on social media</p>
+            <div className="text-center">
+              <p className="font-normal text-black text-lg md:text-2xl leading-6">
+                Connect with us on social media
+              </p>
               <div className="flex gap-9 items-center w-max mx-auto mt-5">
                 <FaceBook />
                 <LinkedIn />
@@ -28,11 +35,13 @@ const Footer = ({ showFooter }) => {
               </div>
             </div>
             <div>
-              <p className="text-lg md:text-2xl text-black text-center leading-6" >We accept</p>
+              <p className="text-lg md:text-2xl text-black text-center leading-6">
+                We accept
+              </p>
               <div className="flex gap-2 items-center w-max">
-                  <CardDiscover />
-                  <CreditCard />
-                  <CardVisa />
+                <CardDiscover />
+                <CreditCard />
+                <CardVisa />
               </div>
             </div>
           </div>

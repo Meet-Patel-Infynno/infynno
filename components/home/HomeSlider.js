@@ -48,22 +48,6 @@ const HomeSlider = () => {
           </p>
         </div>
       </div>
-      <div className="flex h-max gap-12 lg:gap-40 justify-between items-center flex-col absolute bottom-24 sm:bottom-32 lg:bottom-36">
-        <div className="flex flex-col sm:flex-row gap-5 sm:gap-14">
-          <Button className="py-2 px-4 sm:py-3 sm:px-8 whitespace-nowrap gap-5">
-            <p className="font-josefin font-bold text-sm sm:text-base lg:text-xl leading-5 text-white">
-              JOIN GROUP
-            </p>
-            <EditNote className="h-5 w-5 lg:w-min lg:h-min" />
-          </Button>
-          <Button className="py-2 px-4 sm:py-3 sm:px-8 whitespace-nowrap gap-5">
-            <p className="font-josefin font-bold text-sm sm:text-base lg:text-xl leading-5 text-white">
-              CREATE GROUP
-            </p>
-            <EditNote className="h-5 w-5 lg:w-min lg:h-min" />
-          </Button>
-        </div>
-      </div>
     </div>
   );
 };

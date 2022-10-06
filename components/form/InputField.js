@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { EyeFalse, EyeTrue } from "../icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const InputField = ({
   className,
@@ -11,8 +13,10 @@ const InputField = ({
   label,
   ...props
 }) => {
-  const [field, meta] = useField(props);
+  const { setFieldValue } = useFormikContext();
   const [eye, setEye] = useState(false);
+  const [field, meta] = useField(props);
+  // console.log(field);
   return (
     <div className="w-full">
       {label && (
@@ -23,18 +27,42 @@ const InputField = ({
 
       <div className="flex justify-start items-center relative">
         {startIcon && <div className="absolute left-7">{startIcon}</div>}
-        <input
-          type={type === "password" ? (eye ? "text" : type) : type}
-          className={classNames(
-            className,
-            "w-full py-3 rounded-md flex justify-start items-center border border-gray-300",
-            startIcon ? "px-16" : "px-6",
+        {type && (type === "date" || type === "time") ? (
+          <DatePicker
+            className={classNames(
+              className,
+              "w-full py-3 rounded-md flex justify-start items-center border border-gray-300",
+              startIcon ? "px-16" : "px-6",
 
-            meta.touched && meta.error && "border border-red-500"
-          )}
-          {...field}
-          {...props}
-        />
+              meta.touched && meta.error && "border border-red-500"
+            )}
+            {...field}
+            {...props}
+            selected={field?.value ? field.value : null}
+            onChange={(val) => {
+              // type === "date"
+              //   ? console.log(new Date(val).toLocaleDateString())
+              //   : console.log(new Date(val).toLocaleTimeString());
+              // type === "date"
+              //   ? setFieldValue(field.name, new Date(val).toLocaleDateString())
+              //   : setFieldValue(field.name, new Date(val).toLocaleTimeString());
+              setFieldValue(field.name, val);
+            }}
+          />
+        ) : (
+          <input
+            type={type === "password" ? (eye ? "text" : type) : type}
+            className={classNames(
+              className,
+              "w-full py-3 rounded-md flex justify-start items-center border border-gray-300",
+              startIcon ? "px-16" : "px-6",
+
+              meta.touched && meta.error && "border border-red-500"
+            )}
+            {...field}
+            {...props}
+          />
+        )}
         {type === "password" ? (
           <div className="absolute right-7" onClick={() => setEye(!eye)}>
             {eye ? (
