@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-poppins bg-gradient-main min-h-screen;
+}
+.home-slider .slick-dots {
+  @apply absolute bottom-8 lg:bottom-16 flex gap-5;
+}
+.slick-dots li {
+  @apply mr-5;
+}
+.slick-dots li button:before {
+  @apply hidden;
+}
+.slick-dots li button {
+  @apply bg-transparent border border-solid border-orange-500 rounded-full h-4 w-4 mr-0;
+}
+.slick-dots li.slick-active button {
+  @apply bg-white;
+}
+.testimonial-slider .slick-slide {
+  @apply px-4;
+}
+.testimonial-slider .slick-dots {
+  @apply pt-11 md:pt-24 relative pb-8;
+}
+nav a.active {
+  @apply after:content-blank after:w-full after:absolute after:h-1 after:bg-orange-500 after:-bottom-1 after:left-0;
+}
+nav a:hover {
+  @apply text-orange-500;
+}
+.salon-grid-slider .slick-slide > div {
+  @apply flex justify-center;
+}
+.salon-grid-slider .slick-dots {
+  @apply mt-20;
+}
+.salon-cards-section .slick-list {
+  @apply pb-20;
+}
+.availability-data-picker .react-datepicker {
+  @apply !border-none !bg-transparent !font-josefin;
+}
+.availability-data-picker .react-datepicker__header {
+  @apply !bg-transparent;
+}
+.availability-data-picker .react-datepicker__current-month {
+  @apply !text-orange-500;
+}
+.availability-data-picker .react-datepicker__header {
+  @apply !border-none;
+}
+.availability-data-picker .react-datepicker__day-name {
+  @apply text-10 text-center !leading-3 !text-gray-600 md:!mx-2;
+}
+.availability-data-picker .react-datepicker__day:hover {
+  @apply text-black;
+}
+.availability-data-picker .react-datepicker__day {
+  @apply rounded-md md:!mx-2 font-normal;
+}
+.availability-data-picker .react-datepicker__day--disabled,
+.availability-data-picker .react-datepicker__day--disabled:hover {
+  @apply bg-green-500 text-white;
+}
+.availability-data-picker
+  .react-datepicker__day.react-datepicker__day--highlighted {
+  @apply bg-red-500 text-white;
+}
+.availability-data-picker
+  .react-datepicker__day--today.react-datepicker__day--disabled.react-datepicker__day--excluded.react-datepicker__day--highlighted {
+  @apply bg-orange-400 text-black;
+}
+.availability-data-picker .react-datepicker__current-month {
+  @apply -translate-y-3 !text-xl;
+}
+.availability-data-picker .react-datepicker__time-container {
+  @apply pl-2;
+}
+.availability-data-picker .react-datepicker__day--selected {
+  @apply bg-blue-500 text-white;
+}
+.availability-data-picker
+  .react-datepicker__time-container
+  .react-datepicker__time {
+  @apply bg-transparent;
+}
+.availability-data-picker .react-datepicker-time__header {
+  @apply text-clip;
+}
+.appointment-form .react-datepicker {
+  @apply !border-none !bg-white !font-josefin w-max px-7 py-2;
+}
+.appointment-form .react-datepicker__current-month {
+  @apply text-orange-500 !text-xl -translate-y-2;
+}
+.appointment-form .react-datepicker__header {
+  @apply !bg-transparent !border-none;
+}
+.appointment-form .react-datepicker__day-name {
+  @apply text-10 text-center !leading-3 !text-gray-600 !m-0;
+}
+.appointment-form .react-datepicker-popper {
+  @apply !py-0 z-50;
+}
+.appointment-form .react-datepicker__triangle {
+  @apply hidden;
+}
+.appointment-form button.react-datepicker__navigation {
+  @apply top-3;
+}
+.appointment-form
+  button.react-datepicker__navigation.react-datepicker__navigation--next {
+  @apply right-8;
+}
+.appointment-form
+  button.react-datepicker__navigation.react-datepicker__navigation--previous {
+  @apply left-8;
+}
+.appointment-form .react-datepicker__day.react-datepicker__day--outside-month,
+.appointment-form .react-datepicker__day.react-datepicker__day--weekend,
+.availability-data-picker
+  .react-datepicker__day.react-datepicker__day--outside-month,
+.availability-data-picker
+  .react-datepicker__day.react-datepicker__day--weekend {
+  @apply text-gray-600;
+}
+.appointment-form .react-datepicker__month {
+  @apply !mt-0;
+}
+.appointment-form .react-datepicker__day-names {
+  @apply flex justify-between px-2;
+}
+.appointment-form .react-datepicker__day.react-datepicker__day--selected {
+  @apply bg-orange-500;
+}
